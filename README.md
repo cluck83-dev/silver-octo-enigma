@@ -32,32 +32,6 @@ This project is a personal learning tool and is not affiliated with, endorsed by
 4. Bestätige mit "Installieren"
 5. Die App erscheint in deiner App-Liste
 
-## Deployment auf Vercel (kostenlos)
-
-1. **GitHub Repository erstellen:**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit: Hebrew vocabulary app"
-   git branch -M main
-   git remote add origin https://github.com/DEIN-USERNAME/DEIN-REPO.git
-   git push -u origin main
-   ```
-
-2. **Vercel Account:**
-   - Gehe zu https://vercel.com
-   - Registriere dich mit deinem GitHub-Account
-
-3. **Projekt deployen:**
-   - Klicke auf "Add New Project"
-   - Wähle dein GitHub Repository
-   - Vercel erkennt automatisch die Vite-Konfiguration
-   - Klicke auf "Deploy"
-
-4. **Fertig!**
-   - Du erhältst eine URL wie `deine-app.vercel.app`
-   - Diese URL kannst du mit deinen Klassenkameraden teilen
-   - Jedes Mal wenn du Code auf GitHub pushst, wird automatisch neu deployed
 
 ## Technologie
 
