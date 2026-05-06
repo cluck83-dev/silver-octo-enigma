@@ -20,64 +20,52 @@ export function playAudio(hebrewText: string, audioPath?: string): void {
     playTextToSpeech(hebrewText);
   }
 }
-
 function playTextToSpeech(text: string): void {
-  // Prüfe ob ResponsiveVoice geladen und bereit ist
-  const rv = (window as any).responsiveVoice;
+  console.log("🗣️ Browser-TTS wird verwendet für:", text);
 
-  if (rv && rv.voiceSupport()) {
-    console.log("🎤 ResponsiveVoice wird verwendet");
-
-    // Überprüfe ob ResponsiveVoice gerade spricht und stoppe
-    if (rv.isPlaying()) {
-      rv.cancel();
-    }
-
-    // Spiele mit ResponsiveVoice ab - Hebräisch wird unterstützt!
-    rv.speak(text, "Hebrew Female", {
-      rate: 0.85,
-      pitch: 1,
-      volume: 1,
-      onstart: () => {
-        console.log("✅ ResponsiveVoice gestartet");
-      },
-      onend: () => {
-        console.log("✅ ResponsiveVoice beendet");
-      },
-      onerror: (error: any) => {
-        console.error("❌ ResponsiveVoice Fehler:", error);
-        console.log("🔄 Fallback auf Browser-TTS");
-        playBrowserTTS(text);
-      }
-    });
+  if (!('speechSynthesis' in window)) {
+    console.log("Text-to-Speech wird von diesem Browser nicht unterstützt");
     return;
   }
 
-  console.log("⏳ ResponsiveVoice noch nicht geladen, warte...");
+  // Vorherige Wiedergabe stoppen
+  window.speechSynthesis.cancel();
 
-  // Wenn ResponsiveVoice noch lädt, warte bis zu 3 Sekunden
-  let attempts = 0;
-  const maxAttempts = 15;
+  const utterance = new SpeechSynthesisUtterance(text);
 
-  const checkInterval = setInterval(() => {
-    attempts++;
-    const rvCheck = (window as any).responsiveVoice;
+  // Hebräisch
+  utterance.lang = 'he-IL';
 
-    if (rvCheck && rvCheck.voiceSupport()) {
-      clearInterval(checkInterval);
-      console.log("✅ ResponsiveVoice ist jetzt bereit!");
-      playTextToSpeech(text); // Rekursiver Aufruf, jetzt sollte es funktionieren
-      return;
-    }
+  utterance.rate = 0.8;
+  utterance.pitch = 1;
+  utterance.volume = 1;
 
-    if (attempts >= maxAttempts) {
-      clearInterval(checkInterval);
-      console.log("⚠️ ResponsiveVoice Timeout, verwende Browser-TTS");
-      playBrowserTTS(text);
-    }
-  }, 200);
+  // Stimmen laden
+  const voices = window.speechSynthesis.getVoices();
+
+  console.log("Verfügbare Stimmen:", voices);
+
+  // Hebräische Stimme suchen
+  const hebrewVoice = voices.find(
+    (voice) =>
+      voice.lang === 'he-IL' ||
+      voice.lang === 'he' ||
+      voice.lang.startsWith('he')
+  );
+
+  if (hebrewVoice) {
+    console.log("Hebräische Stimme gefunden:", hebrewVoice.name);
+    utterance.voice = hebrewVoice;
+  } else {
+    console.log("Keine hebräische Stimme gefunden");
+  }
+
+  utterance.onerror = (event) => {
+    console.log("TTS Fehler:", event.error);
+  };
+
+  window.speechSynthesis.speak(utterance);
 }
-
 function playBrowserTTS(text: string): void {
   console.log("🗣️ Browser-TTS wird verwendet für:", text);
 
