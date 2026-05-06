@@ -1,4 +1,4 @@
-// Audio-Player mit ResponsiveVoice
+// Audio-Player 
 
 export function playAudio(hebrewText: string, audioPath?: string): void {
   console.log("🔊 Audio wird abgespielt:", hebrewText);
