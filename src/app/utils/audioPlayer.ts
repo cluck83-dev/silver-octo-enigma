@@ -22,7 +22,13 @@ export function playAudio(hebrewText: string, audioPath?: string): void {
 }
 function playTextToSpeech(text: string): void {
   console.log("🗣️ Browser-TTS wird verwendet für:", text);
-
+  
+// Text für Audio bereinigen
+  const cleanText = text
+    .replace(/[!?.,;:"'׳״]/g, '') // Satzzeichen entfernen
+    .replace(/\//g, ' ') // Slash ersetzen
+    .trim();
+  
   if (!('speechSynthesis' in window)) {
     console.log("Text-to-Speech wird von diesem Browser nicht unterstützt");
     return;
@@ -31,7 +37,7 @@ function playTextToSpeech(text: string): void {
   // Vorherige Wiedergabe stoppen
   window.speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance(text);
+  const utterance = new SpeechSynthesisUtterance (cleanText);
 
   // Hebräisch
   utterance.lang = 'he-IL';
@@ -79,7 +85,7 @@ function playBrowserTTS(text: string): void {
 
   // Kleine Verzögerung für bessere Kompatibilität
   setTimeout(() => {
-    const utterance = new SpeechSynthesisUtterance(text);
+    const utterance = new SpeechSynthesisUtterance(cleanText);
 
     // Hebräische Sprache einstellen
     utterance.lang = 'he-IL';
