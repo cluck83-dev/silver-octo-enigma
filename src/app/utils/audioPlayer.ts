@@ -24,10 +24,20 @@ function playTextToSpeech(text: string): void {
   console.log("🗣️ Browser-TTS wird verwendet für:", text);
   
 // Text für Audio bereinigen
-  const cleanText = text
-    .replace(/[!?.,;:"'׳״]/g, '') // Satzzeichen entfernen
-    .replace(/\//g, ' ') // Slash ersetzen
-    .trim();
+const cleanText = text
+  // Satzzeichen entfernen
+  .replace(/[?!.,;:"'׳״،؛]/g, '')
+  // Hebräische / RTL Sonderzeichen entfernen
+  .replace(/[־–—]/g, ' ')
+  // Slash ersetzen
+  .replace(/\//g, ' ')
+  // Mehrfachspaces entfernen
+  .replace(/\s+/g, ' ')
+  .trim();
+
+console.log("🎧 Clean text:", cleanText);
+console.log("ORIGINAL:", text);
+console.log("BEREINIGT:", cleanText);
   
   if (!('speechSynthesis' in window)) {
     console.log("Text-to-Speech wird von diesem Browser nicht unterstützt");
@@ -37,7 +47,7 @@ function playTextToSpeech(text: string): void {
   // Vorherige Wiedergabe stoppen
   window.speechSynthesis.cancel();
 
-  const utterance = new SpeechSynthesisUtterance (cleanText);
+ const utterance = new SpeechSynthesisUtterance(text);
 
   // Hebräisch
   utterance.lang = 'he-IL';
