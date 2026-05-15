@@ -98,7 +98,7 @@ function playBrowserTTS(text: string): void {
 
   // Kleine Verzögerung für bessere Kompatibilität
   setTimeout(() => {
-    const utterance = new SpeechSynthesisUtterance(cleanText);
+   const utterance = new SpeechSynthesisUtterance(cleanText + " ");
 
     // Hebräische Sprache einstellen
     utterance.lang = 'he-IL';
