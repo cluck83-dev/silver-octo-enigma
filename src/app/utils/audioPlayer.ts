@@ -1,10 +1,7 @@
-// Audio-Player 
-
+// Audio-Player
 export function playAudio(hebrewText: string, audioPath?: string): void {
   console.log("🔊 Audio wird abgespielt:", hebrewText);
-
   if (audioPath) {
-    // Option 1: Eigene Audio-Datei abspielen
     try {
       const audio = new Audio(audioPath);
       audio.play().catch((error) => {
@@ -16,126 +13,56 @@ export function playAudio(hebrewText: string, audioPath?: string): void {
       playTextToSpeech(hebrewText);
     }
   } else {
-    // Option 2: Text-to-Speech
     playTextToSpeech(hebrewText);
   }
 }
+
+function cleanHebrewText(text: string): string {
+  return text
+    .replace(/[\u200E\u200F\u202A-\u202E]/g, '')  // RTL-Markierungen
+    .replace(/[?!.,;:"'׳״،؛]/g, '')               // Satzzeichen
+    .replace(/[\/־–—]/g, ' ')                      // Slash / Bindestriche
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function playTextToSpeech(text: string): void {
-  console.log("🗣️ Browser-TTS wird verwendet für:", text);
-  
-// Text für Audio bereinigen
-const cleanText = text
-  // RTL-Markierungen entfernen
-  .replace(/[\u200E\u200F\u202A-\u202E]/g, '')
-
-  // Hebräische Satzzeichen + normale Satzzeichen
-  .replace(/[?!.,;:"'׳״،؛]/g, '')
-
-  // Slash / Bindestriche ersetzen
-  .replace(/[\/־–—]/g, ' ')
-
-  // Mehrfachspaces bereinigen
-  .replace(/\s+/g, ' ')
-
-  .trim();
-
-console.log("ORIGINAL:", text);
-console.log("CLEAN:", cleanText);
-  
   if (!('speechSynthesis' in window)) {
     console.log("Text-to-Speech wird von diesem Browser nicht unterstützt");
     return;
   }
 
-  // Vorherige Wiedergabe stoppen
+  const cleanText = cleanHebrewText(text);
+  console.log("ORIGINAL:", text);
+  console.log("CLEAN:", cleanText);
+
   window.speechSynthesis.cancel();
 
- const utterance = new SpeechSynthesisUtterance(text);
-
-  // Hebräisch
-  utterance.lang = 'he-IL';
-
-  utterance.rate = 0.8;
-  utterance.pitch = 1;
-  utterance.volume = 1;
-
-  // Stimmen laden
-  const voices = window.speechSynthesis.getVoices();
-
-  console.log("Verfügbare Stimmen:", voices);
-
-  // Hebräische Stimme suchen
-  const hebrewVoice = voices.find(
-    (voice) =>
-      voice.lang === 'he-IL' ||
-      voice.lang === 'he' ||
-      voice.lang.startsWith('he')
-  );
-
-  if (hebrewVoice) {
-    console.log("Hebräische Stimme gefunden:", hebrewVoice.name);
-    utterance.voice = hebrewVoice;
-  } else {
-    console.log("Keine hebräische Stimme gefunden");
-  }
-
-  utterance.onerror = (event) => {
-    console.log("TTS Fehler:", event.error);
-  };
-
-  window.speechSynthesis.speak(utterance);
-}
-function playBrowserTTS(text: string): void {
-  console.log("🗣️ Browser-TTS wird verwendet für:", text);
-
-  if (!('speechSynthesis' in window)) {
-    console.log("ℹ️ Text-to-Speech wird von diesem Browser nicht unterstützt");
-    return;
-  }
-
-  // Vorherige Wiedergabe stoppen
-  window.speechSynthesis.cancel();
-
-  // Kleine Verzögerung für bessere Kompatibilität
   setTimeout(() => {
-   const utterance = new SpeechSynthesisUtterance(cleanText + " ");
-
-    // Hebräische Sprache einstellen
+    const utterance = new SpeechSynthesisUtterance(cleanText);
     utterance.lang = 'he-IL';
-    utterance.rate = 0.75;
+    utterance.rate = 0.8;
     utterance.pitch = 1.0;
     utterance.volume = 1.0;
 
-    // Event-Listener - nur wichtige Events loggen
-    utterance.onstart = () => {
-      console.log("✅ Browser-TTS gestartet");
-    };
-
-    utterance.onend = () => {
-      console.log("✅ Browser-TTS beendet");
-    };
-
-    // Fehlerbehandlung ohne störende Logs
+    utterance.onstart = () => console.log("✅ TTS gestartet");
+    utterance.onend = () => console.log("✅ TTS beendet");
     utterance.onerror = (event) => {
-      // Nur loggen wenn es ein echter Fehler ist (nicht "interrupted" oder "canceled")
       if (event.error !== 'interrupted' && event.error !== 'canceled') {
-        console.log("ℹ️ Browser-TTS Info:", event.error);
+        console.log("ℹ️ TTS Fehler:", event.error);
       }
     };
 
-    // Stimmen laden
     const voices = window.speechSynthesis.getVoices();
-
-    // Hebräische Stimme finden
-    const hebrewVoice = voices.find(voice =>
-      voice.lang === 'he-IL' || voice.lang === 'he' || voice.lang.startsWith('he')
+    const hebrewVoice = voices.find(
+      (voice) => voice.lang === 'he-IL' || voice.lang === 'he' || voice.lang.startsWith('he')
     );
 
     if (hebrewVoice) {
       console.log("✅ Hebräische Stimme gefunden:", hebrewVoice.name);
       utterance.voice = hebrewVoice;
     } else {
-      console.log("ℹ️ Keine hebräische Stimme - verwende Standard-Stimme");
+      console.log("ℹ️ Keine hebräische Stimme gefunden");
     }
 
     window.speechSynthesis.speak(utterance);
