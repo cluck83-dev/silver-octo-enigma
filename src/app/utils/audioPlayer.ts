@@ -25,19 +25,22 @@ function playTextToSpeech(text: string): void {
   
 // Text für Audio bereinigen
 const cleanText = text
-  // Satzzeichen entfernen
+  // RTL-Markierungen entfernen
+  .replace(/[\u200E\u200F\u202A-\u202E]/g, '')
+
+  // Hebräische Satzzeichen + normale Satzzeichen
   .replace(/[?!.,;:"'׳״،؛]/g, '')
-  // Hebräische / RTL Sonderzeichen entfernen
-  .replace(/[־–—]/g, ' ')
-  // Slash ersetzen
-  .replace(/\//g, ' ')
-  // Mehrfachspaces entfernen
+
+  // Slash / Bindestriche ersetzen
+  .replace(/[\/־–—]/g, ' ')
+
+  // Mehrfachspaces bereinigen
   .replace(/\s+/g, ' ')
+
   .trim();
 
-console.log("🎧 Clean text:", cleanText);
 console.log("ORIGINAL:", text);
-console.log("BEREINIGT:", cleanText);
+console.log("CLEAN:", cleanText);
   
   if (!('speechSynthesis' in window)) {
     console.log("Text-to-Speech wird von diesem Browser nicht unterstützt");
