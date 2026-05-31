@@ -1,4 +1,3 @@
-// Mock-Daten basierend auf vokabelliste.csv
 // Spalte 1: Hebräisch, Spalte 2: Deutsch, Spalte 3: Lektion, Spalte 4: Wortart
 
 export interface Vocabulary {
@@ -19,7 +18,7 @@ export const vocabularyData: Vocabulary[] = [
   { hebrew: "התחבא", german: "sich verstecken", lesson: "Lektion 1", wordType: "Verben" },
   { hebrew: "חיכה", german: "warten", lesson: "Lektion 1", wordType: "Verben" },
   { hebrew: "טיפל", german: "sich kümmern um / pflegen", lesson: "Lektion 1", wordType: "Verben" },
-  { hebrew: "מכר", german: "verkaufen", lesson: "Lektion 1", wordType: "Verben" },
+  { hebrew: "מָכַר", german: "verkaufen", lesson: "Lektion 1", wordType: "Verben" },
   { hebrew: "נגמר", german: "enden / aufhören", lesson: "Lektion 1", wordType: "Verben" },
   { hebrew: "נזכר", german: "sich erinnern (an etwas)", lesson: "Lektion 1", wordType: "Verben" },
   { hebrew: "ניגן", german: "spielen (ein Instrument)", lesson: "Lektion 1", wordType: "Verben" },
@@ -44,14 +43,14 @@ export const vocabularyData: Vocabulary[] = [
   { hebrew: "שיטה", german: "Methode", lesson: "Lektion 1", wordType: "Substantive" },
   { hebrew: "שירה", german: "Dichtung / Lyrik", lesson: "Lektion 1", wordType: "Substantive" },
   { hebrew: "בודד", german: "einsam", lesson: "Lektion 1", wordType: "Adjektive" },
-  { hebrew: "חקלאי", german: "landwirtschaftlich", lesson: "Lektion 1", wordType: "Adjektive" },
+  { hebrew: "חַקְלָאִי", german: "landwirtschaftlich", lesson: "Lektion 1", wordType: "Adjektive" },
   { hebrew: "משותף", german: "gemeinsam / geteilt", lesson: "Lektion 1", wordType: "Adjektive" },
   { hebrew: "רך", german: "weich / sanft", lesson: "Lektion 1", wordType: "Adjektive" },
   { hebrew: "אף פעם", german: "niemals", lesson: "Lektion 1", wordType: "Andere" },
   { hebrew: "בחוץ", german: "draußen", lesson: "Lektion 1", wordType: "Andere" },
-  { hebrew: "במקום", german: "stattdessen / anstatt", lesson: "Lektion 1", wordType: "Andere" },
+  { hebrew: "בִּמְקוֹם", german: "stattdessen / anstatt", lesson: "Lektion 1", wordType: "Andere" },
   { hebrew: "בקיצור", german: "kurz gesagt / zusammenfassend", lesson: "Lektion 1", wordType: "Andere" },
-  { hebrew: "כפי ש...", german: "wie / so wie", lesson: "Lektion 1", wordType: "Andere" },
+  { hebrew: "...כְּפִי שְ", german: "wie / so wie", lesson: "Lektion 1", wordType: "Andere" },
   { hebrew: "לבד", german: "allein", lesson: "Lektion 1", wordType: "Andere" },
   { hebrew: "ממש", german: "wirklich / echt", lesson: "Lektion 1", wordType: "Andere" },
   { hebrew: "נ.ב.", german: "P.S.", lesson: "Lektion 1", wordType: "Andere" },
