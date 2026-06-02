@@ -1,3 +1,4 @@
+// Daten für Hebrew From Scratch Part 1
 // Spalte 1: Hebräisch, Spalte 2: Deutsch, Spalte 3: Lektion, Spalte 4: Wortart
 
 export interface Vocabulary {
@@ -104,9 +105,9 @@ export const vocabularyData: Vocabulary[] = [
   // Lektion 3
   { hebrew: "הכניס", german: "hineinlegen / einlassen", lesson: "Lektion 3", wordType: "Verben" },
   { hebrew: "שיקר", german: "lügen", lesson: "Lektion 3", wordType: "Verben" },
-  { hebrew: "שנא", german: "hassen", lesson: "Lektion 3", wordType: "Verben" },
-  { hebrew: "שפט", german: "urteilen / richten", lesson: "Lektion 3", wordType: "Verben" },
-  { hebrew: "אומן", german: "Künstler/in", lesson: "Lektion 3", wordType: "Substantive" },
+  { hebrew: "שָׂנֵא", german: "hassen", lesson: "Lektion 3", wordType: "Verben" },
+  { hebrew: "שָׁפַט", german: "urteilen / richten", lesson: "Lektion 3", wordType: "Verben" },
+  { hebrew: "אומן", german: "Künstler", lesson: "Lektion 3", wordType: "Substantive" },
   { hebrew: "הקדוש ברוך הוא", german: "Gott (wörtl.: der Heilige, gesegnet sei er)", lesson: "Lektion 3", wordType: "Substantive" },
   { hebrew: "חוק", german: "Gesetz", lesson: "Lektion 3", wordType: "Substantive" },
   { hebrew: "מגן דוד", german: "Davidstern", lesson: "Lektion 3", wordType: "Substantive" },
@@ -121,11 +122,11 @@ export const vocabularyData: Vocabulary[] = [
   { hebrew: "פסוק", german: "Bibelvers", lesson: "Lektion 3", wordType: "Substantive" },
   { hebrew: "צל", german: "Schatten", lesson: "Lektion 3", wordType: "Substantive" },
   { hebrew: "צעצוע", german: "Spielzeug", lesson: "Lektion 3", wordType: "Substantive" },
-  { hebrew: "רכלן", german: "Klatschmaul / Tratscherin", lesson: "Lektion 3", wordType: "Substantive" },
-  { hebrew: "שקרן", german: "Lügner/in", lesson: "Lektion 3", wordType: "Substantive" },
+  { hebrew: "רכלן", german: "Klatschmaul", lesson: "Lektion 3", wordType: "Substantive" },
+  { hebrew: "שקרן", german: "Lügner", lesson: "Lektion 3", wordType: "Substantive" },
   { hebrew: "חרדי", german: "ultraorthodox (jüdisch)", lesson: "Lektion 3", wordType: "Adjektive" },
   { hebrew: "מלא", german: "voll", lesson: "Lektion 3", wordType: "Adjektive" },
-  { hebrew: "חוץ מ...", german: "außer / abgesehen von", lesson: "Lektion 3", wordType: "Andere" },
+  { hebrew: "...חוץ מְ", german: "außer / abgesehen von", lesson: "Lektion 3", wordType: "Andere" },
   { hebrew: "כאילו", german: "als ob / so als ob", lesson: "Lektion 3", wordType: "Andere" },
 
   // Lektion 4
